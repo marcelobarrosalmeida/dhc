@@ -28,7 +28,7 @@ $(MAIN): $(OBJS)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $<  -o $@
 
 lib:
-	$(CC) $(CFLAGS) $(INCLUDES) -shared -fPIC -o $(MAIN_LIB)
+	$(CC) $(CFLAGS) $(INCLUDES) -shared -fPIC -o $(MAIN_LIB) dhc.c
 
 clean:
 	$(RM) *.o *~ $(MAIN) $(MAIN_AD) $(MAIN_LIB)

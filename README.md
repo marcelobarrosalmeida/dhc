@@ -75,6 +75,13 @@ Fields: Delta,Compress_reduction,skipped,skipped_per,mapped,mapped_perc
 200,45.46%,0,0.00%,10,100.00%
 ```
 
+# Compiling
+
+Just type **make** to generate the audio demo (audio_demo) and the evaluation applications (app). 
+
+For python library, type **make lib** to generate dhc_lib.so. 
+Copy this file and dhc.py to your python application and use **import dhc** for accessing DHC functions. See **dhc.test()** function for usage example.
+
 # Limitations
 
 Sensor data must be represented as **int16_t** (signed 16 bits integers).
