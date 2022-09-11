@@ -26,6 +26,20 @@ The **dhc.py** file presents bindings for the python language using ctypes libra
 
 A complete example can be seen in the **audio_demo.c** file. In this example, real samples taken from a microphone (**audio.h**) are compressed using DHC. In this example it is possible to turn on or off the custom mapping through the define APP_USE_CUSTOM_MAPPING.
 
+```
+$ make
+gcc -O0 -g -Wall -std=gnu11  -I. -c app.c  -o app.o
+gcc -O0 -g -Wall -std=gnu11  -I. -c dhc.c  -o dhc.o
+gcc -O0 -g -Wall -std=gnu11  -I. -o app app.o dhc.o -lm 
+gcc -O0 -g -Wall -std=gnu11  -I. -c audio_demo.c  -o audio_demo.o
+gcc -O0 -g -Wall -std=gnu11  -I. -o audio_demo audio_demo.o dhc.o -lm
+Done
+
+$ ./audio_demo
+Compressor rate (21.15%)
+Result: OK
+```
+
 Furthermore, as the effectiveness of the DHC depends on the differences between the values of the samples, a file called **app.c** was also created to evaluate the behavior of DHC given a possible range for input values and a data vector size. Random values are generated within the specified range and a compression ratio is then presented as a result of the simulation.
 
 For example, suppose your samples typically range from -50 to 150 and your data vector has 512 samples. It is possible to evaluate the DHC behavior for this case through the following command line (we will repeat this test 10 times):
