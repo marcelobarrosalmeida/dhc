@@ -16,6 +16,7 @@ Copyright (c) 2022 Marcelo Barros de Almeida <marcelobarrosalmeida@gmail.com>
 #include "dhc.h"
 #include "audio.h"
 
+#define APP_USE_CUSTOM_MAPPING 1
 #define APP_DATA_SIZE 5000
 #define APP_NUMBER_DRAW(a,b) ((rand() % ((b-a)+1)) + (a))
 
@@ -46,7 +47,11 @@ bool verify(int16_t *dec, int16_t *enc, uint32_t size)
 
 void audio_demo(void)
 {
+#if APP_USE_CUSTOM_MAPPING == 1
     uint8_t map[DHC_TABLE_SIZE];
+#else
+    uint8_t *map = 0;
+#endif
     uint32_t compressed_size_bits;
     uint32_t decode_size;
     uint32_t encode_size = AUDIO_SAMPLE_SIZE;
