@@ -152,8 +152,10 @@ void test_loop(uint32_t repetitions, uint32_t frame_size, int16_t min_value, int
 
 void help(char *app)
 {
-    printf("Usage:\r\n");
+    printf("Usage (no custom dictionary):\r\n");
     printf("%s -m min_value -M max_value -f frame_size -r repetitions -v\r\n", app);
+    printf("Usage (checking custom dictionary):\r\n");
+    printf("%s -m min_value -M max_value -f frame_size -r repetitions -a -v\r\n", app);
 }
 
 int main(int argc, char **argv)
