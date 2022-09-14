@@ -6,7 +6,7 @@ How DHC works is described in the article **"An Adaptive Lossless Data Compressi
 
 As we could not found any C implementation suitable for embedded systems, we decide to create our own version of the compressor. We developed a decompressor as well, a python binding and all code is now available as open source. 
 
-Auhors:
+Authors:
 
 - [Marcelo Barros de Almeida](mailto:marcelobarrosalmeida@gmail.com)
 - [Marden Fagundes](mailto:maf_cadastro-github@yahoo.com)
