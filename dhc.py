@@ -1,7 +1,9 @@
 """
 An implementation of Delta/Huffman Compressor (DHC) for embedded systems.
 
-Copyright (c) 2022 Marcelo Barros de Almeida <marcelobarrosalmeida@gmail.com>
+Copyright (c) 2022 
+Marcelo Barros de Almeida <marcelobarrosalmeida@gmail.com>
+Marden Fagundes <maf_cadastro-github@yahoo.com>
 """
 
 from ctypes import *

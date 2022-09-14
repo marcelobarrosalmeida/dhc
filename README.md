@@ -4,7 +4,12 @@ DHC is an implementation of Delta/Huffman Compressor (DHC) for embedded systems.
 
 How DHC works is described in the article **"An Adaptive Lossless Data Compression Scheme for Wireless Sensor Networks"**, by Eugenio Martinelli, Jonathan Gana Kolo, S. Anandan Shanmugam, David Wee Gin Lim, Li-Minn Ang, Kah Phooi Seng (2012, Journal of Sensors, https://doi.org/10.1155/2012/539638). It is available as open access [here](https://www.hindawi.com/journals/js/2012/539638/).
 
-As I could not found any C implementation suitable for embedded systems, I decide to create my own version of the compressor. I developed a decompressor as well, a python binding and all code is now available as open source.
+As we could not found any C implementation suitable for embedded systems, we decide to create our own version of the compressor. We developed a decompressor as well, a python binding and all code is now available as open source. 
+
+Auhors:
+
+- [Marcelo Barros de Almeida](mailto:marcelobarrosalmeida@gmail.com)
+- [Marden Fagundes](mailto:maf_cadastro-github@yahoo.com)
 
 # Using DHC
 
