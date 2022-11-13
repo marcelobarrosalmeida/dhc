@@ -1,4 +1,7 @@
 
 *.o
+*.pyc
 app
 audio_demo
+python_bindings/venv/*
+python_bindings/__pychave__/*

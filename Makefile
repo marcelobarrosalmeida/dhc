@@ -29,6 +29,7 @@ $(MAIN): $(OBJS)
 
 lib:
 	$(CC) $(CFLAGS) $(INCLUDES) -shared -fPIC -o $(MAIN_LIB) dhc.c
+	cp $(MAIN_LIB) ./python_bindings/
 
 clean:
 	$(RM) *.o *~ $(MAIN) $(MAIN_AD) $(MAIN_LIB)
@@ -36,14 +37,4 @@ clean:
 depend: $(SRCS)
 	makedepend $(INCLUDES) $^
 
-# DO NOT DELETE
 
-app.o: /usr/include/stdint.h /usr/include/stdio.h /usr/include/string.h
-app.o: /usr/include/stdlib.h /usr/include/time.h /usr/include/features.h
-app.o: /usr/include/features-time64.h /usr/include/stdc-predef.h
-app.o: /usr/include/math.h /usr/include/unistd.h /usr/include/getopt.h
-app.o: /usr/include/assert.h dhc.h
-dhc.o: /usr/include/stdint.h /usr/include/stdio.h /usr/include/string.h
-dhc.o: /usr/include/unistd.h /usr/include/features.h
-dhc.o: /usr/include/features-time64.h /usr/include/stdc-predef.h
-dhc.o: /usr/include/time.h /usr/include/stdlib.h dhc.h

@@ -25,7 +25,20 @@ The use of DHC can be summarized in 2 steps:
 
 Data decompression can be done with the **dhc_decompress()** function.
 
-The **dhc.py** file presents bindings for the python language using ctypes library.
+## Python bindings
+
+The **dhc.py** file inside directory **python_bindings** presents bindings for the python language using ctypes library.
+Prior using theses binding you need to compile the the library **dhc_lib.so** for your platform:
+
+```
+$ make clean
+rm -f *.o *~ app audio_demo dhc_lib.so
+$ make lib
+gcc -O0 -g -Wall -std=gnu11  -I. -shared -fPIC -o dhc_lib.so dhc.c
+cp dhc_lib.so ./python_bindings/
+```
+
+Copy **dhc_lib.so** and **dhc.py** into your python application and use **import dhc** for accessing DHC functions. See **dhc.main()** function for usage example.
 
 ## Examples
 
@@ -97,9 +110,7 @@ Fields: Delta,Compress_reduction,skipped,skipped_per,mapped,mapped_perc
 # Compiling
 
 Just type **make** to generate the audio demo (audio_demo) and the evaluation applications (app). 
-
 For python library, type **make lib** to generate dhc_lib.so. 
-Copy this file and dhc.py to your python application and use **import dhc** for accessing DHC functions. See **dhc.test()** function for usage example.
 
 # Limitations
 
