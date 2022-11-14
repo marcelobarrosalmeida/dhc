@@ -1,6 +1,6 @@
-# Delta/Huffman Compressor (DHC)
+# Delta/Huffman Compressor/Decompressor (DHC)
 
-DHC is an implementation of Delta/Huffman Compressor (DHC) for embedded systems.
+DHC is an implementation of Delta/Huffman Compressor/Decompressor (DHC) for embedded systems.
 
 How DHC works is described in the article **"An Efficient Lossless Compression Algorithm for Tiny Nodes of Monitoring Wireless Sensor Networks"**, by Francesco Marcelloni and Massimo Vecchio (2009, The Computer Journal, https://doi.org/10.1093/comjnl/bxp035). 
 
