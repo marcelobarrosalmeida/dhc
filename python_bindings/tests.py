@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 """
 An implementation of Delta/Huffman Compressor (DHC) for embedded systems.
 
@@ -169,10 +168,10 @@ def eval_minmax():
     
 
     plt.plot(minmaxs, avg_var,linewidth=2, markersize=4, marker='o')
-    plt.xlabel('Diferença Máxima')
-    plt.ylabel('Taxa de Comptactação [%]')
-    plt.title('Compactação Estimada do DHC')
-    plt.xticks(list(range(0,1900,100)))
+    plt.xlabel('Maximum Delta')
+    plt.ylabel('Compressor Rate [%]')
+    #plt.title('Estimated Compression Rate for DHC')
+    #plt.xticks(list(range(0,1900,100)))
     plt.grid()
     #plt.errorbar(stds, avg_var, std_var, linestyle='-', marker='^')
     plt.show()
@@ -183,7 +182,7 @@ def eval_minmax():
     plt.xlabel('Diferença Máxima')
     plt.ylabel('Taxa de Comptactação [%]')
     plt.title('Eficiência da Compactação com Mapeamento')
-    plt.xticks(list(range(0,1900,100)))
+    #plt.xticks(list(range(0,1900,100)))
     plt.grid()
     plt.legend()
     #plt.errorbar(stds, avg_var, std_var, linestyle='-', marker='^')
@@ -216,7 +215,85 @@ def input_data_sample_nor(avg=0,std=10,num_points=30):
     plt.grid()
     plt.show()
 
+def accel():
+    data ="""|1 |02g|20221114-195118|SIZE 1787 bytes|COMPRESSED RATIO 40.425            |
+|2 |02g|20221114-200051|SIZE 1834 bytes|COMPRESSED RATIO 38.8375           |
+|3 |02g|20221114-201051|SIZE 1824 bytes|COMPRESSED RATIO 39.170833333333334|
+|4 |02g|20221114-202045|SIZE 1810 bytes|COMPRESSED RATIO 39.6375           |
+|5 |02g|20221114-203014|SIZE 1861 bytes|COMPRESSED RATIO 37.9625           |
+|6 |02g|20221114-203927|SIZE 1833 bytes|COMPRESSED RATIO 38.87916666666667 |
+|7 |02g|20221114-204908|SIZE 1897 bytes|COMPRESSED RATIO 36.75416666666667 |
+|8 |02g|20221114-205904|SIZE 1888 bytes|COMPRESSED RATIO 37.041666666666664|
+|9 |02g|20221114-210834|SIZE 1814 bytes|COMPRESSED RATIO 39.53333333333333 |
+|10|02g|20221114-211756|SIZE 1817 bytes|COMPRESSED RATIO 39.416666666666664|
+|11|04g|20221114-213801|SIZE 1711 bytes|COMPRESSED RATIO 42.954166666666666|
+|12|04g|20221114-214718|SIZE 1762 bytes|COMPRESSED RATIO 41.2625           |
+|13|04g|20221114-215604|SIZE 1688 bytes|COMPRESSED RATIO 43.733333333333334|
+|14|04g|20221114-220508|SIZE 1770 bytes|COMPRESSED RATIO 40.979166666666664|
+|15|04g|20221114-221430|SIZE 1702 bytes|COMPRESSED RATIO 43.25416666666667 |
+|16|04g|20221114-222333|SIZE 1709 bytes|COMPRESSED RATIO 43.0125           |
+|17|04g|20221114-223233|SIZE 1738 bytes|COMPRESSED RATIO 42.0625           |
+|18|04g|20221114-224146|SIZE 1723 bytes|COMPRESSED RATIO 42.5375           |
+|19|04g|20221114-225107|SIZE 1777 bytes|COMPRESSED RATIO 40.7375           |
+|20|04g|20221114-230042|SIZE 1819 bytes|COMPRESSED RATIO 39.35             |
+|21|08g|20221114-231150|SIZE 1581 bytes|COMPRESSED RATIO 47.270833333333336|
+|22|08g|20221114-232020|SIZE 1609 bytes|COMPRESSED RATIO 46.358333333333334|
+|23|08g|20221114-232857|SIZE 1625 bytes|COMPRESSED RATIO 45.80833333333333 |
+|24|08g|20221114-233726|SIZE 1630 bytes|COMPRESSED RATIO 45.65             |
+|25|08g|20221114-234614|SIZE 1625 bytes|COMPRESSED RATIO 45.825            |
+|26|08g|20221114-235506|SIZE 1618 bytes|COMPRESSED RATIO 46.06666666666667 |
+|27|08g|20221115-000358|SIZE 1636 bytes|COMPRESSED RATIO 45.45             |
+|28|08g|20221115-001238|SIZE 1598 bytes|COMPRESSED RATIO 46.733333333333334|
+|29|08g|20221115-002116|SIZE 1616 bytes|COMPRESSED RATIO 46.11666666666667 |
+|30|08g|20221115-003004|SIZE 1663 bytes|COMPRESSED RATIO 44.5375           |
+|31|16g|20221115-003834|SIZE 1423 bytes|COMPRESSED RATIO 52.541666666666664|
+|32|16g|20221115-004637|SIZE 1523 bytes|COMPRESSED RATIO 49.21666666666667 |
+|33|16g|20221115-005554|SIZE 1667 bytes|COMPRESSED RATIO 44.425            |
+|34|16g|20221115-010425|SIZE 1464 bytes|COMPRESSED RATIO 51.1875           |
+|35|16g|20221115-011226|SIZE 1458 bytes|COMPRESSED RATIO 51.38333333333333 |
+|36|16g|20221115-012046|SIZE 1506 bytes|COMPRESSED RATIO 49.775            |
+|37|16g|20221115-012909|SIZE 1517 bytes|COMPRESSED RATIO 49.425            |
+|38|16g|20221115-013738|SIZE 1518 bytes|COMPRESSED RATIO 49.37083333333333 |
+|39|16g|20221115-014613|SIZE 1523 bytes|COMPRESSED RATIO 49.21666666666667 |
+|40|16g|20221115-015436|SIZE 1496 bytes|COMPRESSED RATIO 50.12916666666667 |"""
+    data = data.split('\n')
+    samples = {'02g':[],'04g':[],'08g':[],'16g':[],}
+    for line in data:
+        fields = line.split('|')
+        label = fields[2]
+        size = int(fields[4].split(' ')[1])
+        cr = float(fields[5].split(' ')[2])
+        samples[label].append([size,cr])
+    #print(samples)
+    labels = ['02g','04g','08g','16g']
+    y = []
+    e = []
+    ys = []
+    es = []    
+    for label in labels:
+        size = [ v[0] for v in samples[label] ]
+        cr = [ v[1] for v in samples[label] ]
+        y.append(np.mean(cr))
+        e.append(np.std(cr))
+        ys.append(np.mean(size))
+        es.append(np.std(size))
+
+    labels = [ v.upper().replace('0','') for v in labels ]
+
+    plt.grid()
+    plt.errorbar(labels, y, e, linestyle='-', marker='o')
+    plt.xlabel('Accelerometer  Scale')
+    plt.ylabel('Compression Rate [%]')
+    plt.show()
+
+    plt.grid()
+    plt.errorbar(labels, ys, es, linestyle='-', marker='o')
+    plt.xlabel('Accelerometer  Scale')
+    plt.ylabel('Size [Bytes]')
+    plt.show()
+
 if __name__ == '__main__':
-    input_data_sample_lin(data_range=100)
-    eval_minmax()
+    #input_data_sample_lin(data_range=100)
+    #eval_minmax()
+    accel()
 
